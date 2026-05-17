@@ -1,4 +1,3 @@
-// ================= PRODUCTS =================
 export const productsLocators = {
   productCard: '.product-image-wrapper',
   addToCart: 'Add to cart',
@@ -6,14 +5,11 @@ export const productsLocators = {
   modalClose: '.btn-success.close-modal.btn-block'
 }
 
-// ================= CART =================
 export const cartLocators = {
   checkoutBtn: '.btn.btn-default.check_out',
-  cartIcon: '.fa-shopping-cart',
   registerLoginLink: 'a[href="/login"], a:contains("Register / Login")'
 }
 
-// ================= AUTH =================
 export const authLocators = {
   signupName: '[data-qa="signup-name"]',
   signupEmail: '[data-qa="signup-email"]',
@@ -37,9 +33,8 @@ export const authLocators = {
 
   createAccountBtn: '[data-qa="create-account"]',
   continueBtn: '[data-qa="continue-button"]'
-
-  
 }
+
 export const paymentLocators = {
   nameOnCard: '[data-qa="name-on-card"]',
   cardNumber: '.form-control.card-number',

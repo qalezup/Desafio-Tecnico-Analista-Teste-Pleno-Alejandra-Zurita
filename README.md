@@ -1,5 +1,36 @@
 # Desafio-Tec-Analista-Teste-Pleno-Alejandra-Zu
-Parte 1: Estratégia, BDD e Testes Manuais (Visão de Produto)
+# Parte 1: Estratégia, BDD e Testes Manuais (Visão de Produto)
+Funcionalidade: Processo de finalização de compra com cadastro durante o checkout
+
+Como um cliente da loja online
+Quero realizar meu cadastro durante o processo de compra
+Para que eu possa concluir meu pedido com sucesso
+
+Contexto:
+Dado que o cliente está navegando na loja online
+E existem produtos disponíveis para compra
+
+Cenário: Finalizar uma compra com sucesso realizando cadastro durante o checkout
+
+Dado que o cliente adiciona produtos ao carrinho de compras
+E prossegue para a etapa de checkout
+
+Quando o cliente escolhe realizar o cadastro durante o processo de finalização da compra
+E informa dados válidos para criação da conta
+Então a conta deve ser criada com sucesso
+E o cliente deve permanecer autenticado na aplicação
+
+Quando o cliente retorna para o fluxo de checkout
+Então o resumo do pedido e os dados de entrega devem ser exibidos corretamente
+
+Quando o cliente confirma o pedido utilizando informações de pagamento válidas
+Então o pedido deve ser finalizado com sucesso
+E o cliente deve visualizar a mensagem de confirmação da compra
+
+Quando o cliente solicita a exclusão da conta
+Então a conta deve ser removida com sucesso
+
+---
 # Parte 2: Automação (Engenharia de Código)
 Este projeto foi desenvolvido como parte de um desafio técnico para a vaga de QA Automation Engineer, utilizando Cypress para automação de testes E2E e testes de API.
 
@@ -187,9 +218,11 @@ Executar testes em modo headless
 ```bash
 npx cypress run
 ```
-
 ---
-# Relatório de Bug — Código HTTP Incorreto na API de Criação de Conta
+
+# Parte 3: O "Chapéu" de Investigador (Bug Report)
+
+# Bug Report 1 — Código HTTP Incorreto na API de Criação de Conta
 
 ## Endpoint
 `POST https://automationexercise.com/api/createAccount`
@@ -262,7 +295,7 @@ https://automationexercise.com/api/createAccount
 ## Resultado Esperado
 
 ```http
-HTTP/1.1 201 Created
+ 201 Created
 ```
 
 ---
@@ -270,7 +303,7 @@ HTTP/1.1 201 Created
 ## Resultado Atual
 
 ```http
-HTTP/1.1 200 OK
+ 200 OK
 ```
 
 Corpo da resposta:
@@ -293,7 +326,7 @@ Corpo da resposta:
 
 ---
 
-# Relatório de Bug — API Aceita Formato de E-mail Inválido Durante a Criação de Conta
+# Bug Report 2 — API Aceita Formato de E-mail Inválido Durante a Criação de Conta
 
 ## Endpoint
 `POST https://automationexercise.com/api/createAccount`
@@ -359,7 +392,7 @@ A API deveria validar o formato do e-mail e rejeitar a requisição.
 Resposta esperada:
 
 ```http
-HTTP/1.1 400 Bad Request
+ 400 Bad Request
 ```
 
 Exemplo de corpo da resposta:
@@ -380,7 +413,7 @@ A API aceita o formato inválido de e-mail e cria a conta com sucesso.
 Resposta retornada:
 
 ```http
-HTTP/1.1 200 OK
+ 200 OK
 ```
 
 Corpo da resposta:

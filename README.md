@@ -1,4 +1,4 @@
-# Desafio-Tec-Analista-Teste-Pleno-Alejandra-Zu
+# Desafio-Tecnico-Analista-Teste-Pleno-Alejandra-Zurita
 ## Parte 1: Estratégia, BDD e Testes Manuais (Visão de Produto)
 ### 1. BDD 
 Funcionalidade: Processo de finalização de compra com cadastro durante o checkout

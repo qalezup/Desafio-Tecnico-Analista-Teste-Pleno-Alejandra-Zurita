@@ -49,7 +49,7 @@ describe('e2e frontend - purchase flow', () => {
     AuthPage.continue()
     CartPage.openCart()
     CartPage.proceedToCheckout()
-    CartPage.proceedToCheckout()
+    CartPage.proceedToPlaceHolder()
 
     PaymentPage.fillCard({
     name: user.name,

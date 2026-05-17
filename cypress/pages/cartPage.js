@@ -13,7 +13,11 @@ class CartPage {
   proceedToCheckout() {
     cy.get(cartLocators.checkoutBtn).click()
   }
-
+  
+  proceedToPlaceHolder() {
+    cy.contains('Place Order').click()
+  }
+  
   goToRegisterLogin() {
     cy.contains('a', 'Register / Login').click()
   }

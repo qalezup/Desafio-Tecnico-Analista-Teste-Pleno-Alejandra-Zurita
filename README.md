@@ -1,6 +1,6 @@
 # Desafio-Tec-Analista-Teste-Pleno-Alejandra-Zu
-# Parte 1: Estratégia, BDD e Testes Manuais (Visão de Produto)
-1. BDD 
+## Parte 1: Estratégia, BDD e Testes Manuais (Visão de Produto)
+### 1. BDD 
 Funcionalidade: Processo de finalização de compra com cadastro durante o checkout
 
 Como um cliente da loja online
@@ -31,9 +31,9 @@ E o cliente deve visualizar a mensagem de confirmação da compra
 Quando o cliente solicita a exclusão da conta
 Então a conta deve ser removida com sucesso
 
-2. Edge cases
+### 2. Edge cases
 
-Edge case 1:
+#### Edge case 1:
 Funcionalidade: Validação obrigatória dos dados de pagamento
 
 Como um cliente da loja online
@@ -46,22 +46,17 @@ E acessa a etapa de pagamento do checkout
 
 Cenário: Impedir finalização da compra ao preencher os campos de pagamento utilizando apenas a tecla de espaço
 
-Quando o cliente preenche os campos de pagamento pressionando apenas a tecla de espaço
-  | Campo              |
-  | Nome no Cartão     |
-  | Número do Cartão   |
-  | CVC                |
-  | Data de Expiração  |
-
+Quando o cliente preenche os campos de pagamento pressionando apenas a tecla de espaço 
+ 
 E confirma o pagamento do pedido
 
 Então o sistema não deve permitir a finalização da compra
 E mensagens de validação devem ser exibidas para os campos obrigatórios
 E o pedido não deve ser processado.
 
-(OBS: Atualmente é possivel finalizar a compra quando o cliente preenche só com tecla de espaço sem introducir dados válidos)
+OBS: Atualmente é possivel finalizar a compra quando o cliente preenche só com tecla de espaço sem introducir dados válidos
 ---
-Edge case 2:
+#### Edge case 2:
 Funcionalidade: Validação de limite de caracteres no formulário de cadastro de usuário
 
 Como um visitante da loja online
@@ -83,7 +78,7 @@ E a aplicação não deve apresentar lentidão, falhas ou comportamento inespera
 E a conta não deve ser criada com dados inválidos
 
 ---
-Edge case 3: 
+#### Edge case 3: 
 Funcionalidade: Prevenção de múltiplas submissões no pagamento
 
 Como um cliente da loja online
@@ -106,14 +101,14 @@ E a aplicação não deve apresentar erros, lentidão ou comportamento inesperad
 
 
 ---
-# Parte 2: Automação (Engenharia de Código)
+## Parte 2: Automação (Engenharia de Código)
 Este projeto foi desenvolvido como parte de um desafio técnico para a vaga de QA Automation Engineer, utilizando Cypress para automação de testes E2E e testes de API.
 
 O principal objetivo foi validar funcionalidades críticas da aplicação Automation Exercise por meio de uma estrutura reutilizável, escalável e de fácil manutenção, seguindo boas práticas de automação.
 
 ---
 
-Tecnologias utilizadas
+### Tecnologias utilizadas
 
 * Cypress
 * JavaScript
@@ -124,9 +119,9 @@ Tecnologias utilizadas
 
 ---
 
-# Funcionalidades automatizadas
+### Funcionalidades automatizadas
 
-## Testes de API
+#### Testes de API
 
 Foram implementados testes automatizados para validar endpoints REST, incluindo:
 
@@ -138,7 +133,7 @@ Foram implementados testes automatizados para validar endpoints REST, incluindo:
 
 ---
 
-## Testes E2E
+#### Testes E2E
 
 Foi automatizado o fluxo completo de compra:
 
@@ -151,7 +146,7 @@ Foi automatizado o fluxo completo de compra:
 
 ---
 
-# Arquitetura do projeto
+### Arquitetura do projeto
 
 O projeto foi estruturado utilizando o padrão Page Object Model (POM) para melhorar:
 
@@ -162,7 +157,7 @@ O projeto foi estruturado utilizando o padrão Page Object Model (POM) para melh
 
 ---
 
-# Estrutura de pastas
+### Estrutura de pastas
 
 `cypress/tests`
 Contém todos os casos de teste automatizados.
@@ -260,7 +255,7 @@ Permite:
 
 ---
 
-# Boas práticas aplicadas
+### Boas práticas aplicadas
 
 * Page Object Model (POM)
 * Reutilização de dados
@@ -273,7 +268,7 @@ Permite:
 * Código desacoplado e de fácil manutenção
 
 ---
-# Instalação do projeto
+### Instalação do projeto
 Precisa instalar 
 
 ```bash
@@ -281,7 +276,7 @@ npm init -y
 npm install
 npm install cypress --save-dev
 ```
-# Execução do projeto
+### Execução do projeto
 Executar Cypress em modo interativo
 
 ```bash
@@ -297,14 +292,14 @@ npx cypress run
 
 # Parte 3: O "Chapéu" de Investigador (Bug Report)
 
-# Bug Report 1 — Código HTTP Incorreto na API de Criação de Conta
+## Bug Report 1 — Código HTTP Incorreto na API de Criação de Conta
 
-## Endpoint
+### Endpoint
 `POST https://automationexercise.com/api/createAccount`
 
 ---
 
-## Descrição
+### Descrição
 
 A API retorna um código HTTP incorreto quando um usuário é criado com sucesso.
 
@@ -331,7 +326,7 @@ enquanto o corpo da resposta indica criação bem-sucedida:
 
 ---
 
-## Passos para Reproduzir
+### Passos para Reproduzir
 
 1. Envie uma requisição `POST` para:
 
@@ -367,7 +362,7 @@ https://automationexercise.com/api/createAccount
 
 ---
 
-## Resultado Esperado
+### Resultado Esperado
 
 ```http
  201 Created
@@ -375,7 +370,7 @@ https://automationexercise.com/api/createAccount
 
 ---
 
-## Resultado Atual
+### Resultado Atual
 
 ```http
  200 OK
@@ -392,7 +387,7 @@ Corpo da resposta:
 
 ---
 
-## Impacto
+### Impacto
 
 - Quebra as convenções de APIs REST
 - Causa falhas em validações automatizadas de API
@@ -401,14 +396,14 @@ Corpo da resposta:
 
 ---
 
-# Bug Report 2 — API Aceita Formato de E-mail Inválido Durante a Criação de Conta
+## Bug Report 2 — API Aceita Formato de E-mail Inválido Durante a Criação de Conta
 
-## Endpoint
+### Endpoint
 `POST https://automationexercise.com/api/createAccount`
 
 ---
 
-## Descrição
+### Descrição
 
 A API permite a criação de contas utilizando um formato de e-mail inválido.
 
@@ -424,7 +419,7 @@ Isso indica que a validação do formato de e-mail está ausente ou não está s
 
 ---
 
-## Passos para Reproduzir
+### Passos para Reproduzir
 
 1. Envie uma requisição `POST` para:
 
@@ -460,7 +455,7 @@ https://automationexercise.com/api/createAccount
 
 ---
 
-## Resultado Esperado
+### Resultado Esperado
 
 A API deveria validar o formato do e-mail e rejeitar a requisição.
 
@@ -481,7 +476,7 @@ Exemplo de corpo da resposta:
 
 ---
 
-## Resultado Atual
+### Resultado Atual
 
 A API aceita o formato inválido de e-mail e cria a conta com sucesso.
 
@@ -502,7 +497,7 @@ Corpo da resposta:
 
 ---
 
-## Impacto
+### Impacto
 
 - Dados inválidos são armazenados no sistema
 - Quebra os padrões de validação de entrada no backend

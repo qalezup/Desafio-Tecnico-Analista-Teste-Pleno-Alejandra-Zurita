@@ -45,7 +45,7 @@ Foi automatizado o fluxo completo de compra:
 
 ---
 
-#Arquitetura do projeto
+# Arquitetura do projeto
 
 O projeto foi estruturado utilizando o padrão Page Object Model (POM) para melhorar:
 
@@ -56,7 +56,7 @@ O projeto foi estruturado utilizando o padrão Page Object Model (POM) para melh
 
 ---
 
-#Estrutura de pastas
+# Estrutura de pastas
 
 `cypress/tests`
 Contém todos os casos de teste automatizados.
@@ -189,30 +189,30 @@ npx cypress run
 ```
 
 ---
-# Bug Report — Incorrect HTTP Status Code on Create Account API
+# Relatório de Bug — Código HTTP Incorreto na API de Criação de Conta
 
 ## Endpoint
 `POST https://automationexercise.com/api/createAccount`
 
 ---
 
-## Description
+## Descrição
 
-The API returns an incorrect HTTP status code when a user is successfully created.
+A API retorna um código HTTP incorreto quando um usuário é criado com sucesso.
 
-According to REST API standards and the API documentation, the expected response should be:
+De acordo com os padrões de APIs REST e com a documentação da API, a resposta esperada deveria ser:
 
 ```http
 201 Created
 ```
 
-However, the API currently returns:
+Entretanto, atualmente a API retorna:
 
 ```http
 200 OK
 ```
 
-while the response body indicates successful creation:
+enquanto o corpo da resposta indica criação bem-sucedida:
 
 ```json
 {
@@ -223,15 +223,15 @@ while the response body indicates successful creation:
 
 ---
 
-## Steps to Reproduce
+## Passos para Reproduzir
 
-1. Send a `POST` request to:
+1. Envie uma requisição `POST` para:
 
 ```bash
 https://automationexercise.com/api/createAccount
 ```
 
-2. Use valid request parameters:
+2. Utilize parâmetros válidos na requisição:
 
 ```json
 {
@@ -255,11 +255,11 @@ https://automationexercise.com/api/createAccount
 }
 ```
 
-3. Verify the returned HTTP status code.
+3. Verifique o código HTTP retornado.
 
 ---
 
-## Expected Result
+## Resultado Esperado
 
 ```http
 HTTP/1.1 201 Created
@@ -267,13 +267,13 @@ HTTP/1.1 201 Created
 
 ---
 
-## Actual Result
+## Resultado Atual
 
 ```http
 HTTP/1.1 200 OK
 ```
 
-Response body:
+Corpo da resposta:
 
 ```json
 {
@@ -284,46 +284,47 @@ Response body:
 
 ---
 
-## Impact
+## Impacto
 
-- Breaks REST API conventions
-- Causes failures in automated API validations
-- Creates inconsistency between HTTP response and payload response
-- May confuse API consumers
+- Quebra as convenções de APIs REST
+- Causa falhas em validações automatizadas de API
+- Cria inconsistência entre a resposta HTTP e o payload retornado
+- Pode causar confusão para consumidores da API
 
 ---
-#  Bug Report — API Accepts Invalid Email Format During Account Creation
+
+# Relatório de Bug — API Aceita Formato de E-mail Inválido Durante a Criação de Conta
 
 ## Endpoint
 `POST https://automationexercise.com/api/createAccount`
 
 ---
 
-## Description
+## Descrição
 
-The API allows account creation using an invalid email format.
+A API permite a criação de contas utilizando um formato de e-mail inválido.
 
-According to validation best practices, the API should reject malformed email addresses and return:
+De acordo com as boas práticas de validação, a API deveria rejeitar e-mails mal formatados e retornar:
 
 ```http
 400 Bad Request
 ```
 
-However, the endpoint accepts invalid email formats and successfully creates the user account.
+Entretanto, o endpoint aceita formatos inválidos de e-mail e cria a conta com sucesso.
 
-This indicates that email format validation is missing or not being enforced on the backend.
+Isso indica que a validação do formato de e-mail está ausente ou não está sendo aplicada corretamente no backend.
 
 ---
 
-## Steps to Reproduce
+## Passos para Reproduzir
 
-1. Send a `POST` request to:
+1. Envie uma requisição `POST` para:
 
 ```bash
 https://automationexercise.com/api/createAccount
 ```
 
-2. Use an invalid email format in the request body:
+2. Utilize um formato de e-mail inválido no corpo da requisição:
 
 ```json
 {
@@ -347,21 +348,21 @@ https://automationexercise.com/api/createAccount
 }
 ```
 
-3. Observe the API response.
+3. Observe a resposta da API.
 
 ---
 
-## Expected Result
+## Resultado Esperado
 
-The API should validate the email format and reject the request.
+A API deveria validar o formato do e-mail e rejeitar a requisição.
 
-Expected response:
+Resposta esperada:
 
 ```http
 HTTP/1.1 400 Bad Request
 ```
 
-Example response body:
+Exemplo de corpo da resposta:
 
 ```json
 {
@@ -372,17 +373,17 @@ Example response body:
 
 ---
 
-## Actual Result
+## Resultado Atual
 
-The API accepts the invalid email format and creates the account successfully.
+A API aceita o formato inválido de e-mail e cria a conta com sucesso.
 
-Returned response:
+Resposta retornada:
 
 ```http
 HTTP/1.1 200 OK
 ```
 
-Response body:
+Corpo da resposta:
 
 ```json
 {
@@ -393,13 +394,12 @@ Response body:
 
 ---
 
-## Impact
+## Impacto
 
-- Invalid data is stored in the system
-- Breaks backend input validation standards
-- May cause issues in authentication, communication, or user management flows
-- Reduces API reliability and data integrity
-- Can generate inconsistent or unusable user records
+- Dados inválidos são armazenados no sistema
+- Quebra os padrões de validação de entrada no backend
+- Pode causar problemas em fluxos de autenticação, comunicação e gerenciamento de usuários
+- Reduz a confiabilidade e integridade da API
+- Pode gerar registros inconsistentes ou inutilizáveis
 
 ---
-

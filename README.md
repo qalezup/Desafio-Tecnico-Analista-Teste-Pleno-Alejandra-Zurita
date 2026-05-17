@@ -18,9 +18,9 @@ Tecnologias utilizadas
 
 ---
 
-#Funcionalidades automatizadas
+# Funcionalidades automatizadas
 
-##Testes de API
+## Testes de API
 
 Foram implementados testes automatizados para validar endpoints REST, incluindo:
 
@@ -32,7 +32,7 @@ Foram implementados testes automatizados para validar endpoints REST, incluindo:
 
 ---
 
-##Testes E2E
+## Testes E2E
 
 Foi automatizado o fluxo completo de compra:
 
@@ -187,6 +187,219 @@ Executar testes em modo headless
 ```bash
 npx cypress run
 ```
+
+---
+# Bug Report — Incorrect HTTP Status Code on Create Account API
+
+## Endpoint
+`POST https://automationexercise.com/api/createAccount`
+
+---
+
+## Description
+
+The API returns an incorrect HTTP status code when a user is successfully created.
+
+According to REST API standards and the API documentation, the expected response should be:
+
+```http
+201 Created
+```
+
+However, the API currently returns:
+
+```http
+200 OK
+```
+
+while the response body indicates successful creation:
+
+```json
+{
+  "responseCode": 201,
+  "message": "User created!"
+}
+```
+
+---
+
+## Steps to Reproduce
+
+1. Send a `POST` request to:
+
+```bash
+https://automationexercise.com/api/createAccount
+```
+
+2. Use valid request parameters:
+
+```json
+{
+  "name": "QA User",
+  "email": "testuser123@company.com",
+  "password": "Password1!",
+  "title": "Mr",
+  "birth_date": "10",
+  "birth_month": "January",
+  "birth_year": "1995",
+  "firstname": "QA",
+  "lastname": "User",
+  "company": "QA Company",
+  "address1": "Street 1",
+  "address2": "Apartment 2",
+  "country": "Brazil",
+  "zipcode": "77000",
+  "state": "Tocantins",
+  "city": "Palmas",
+  "mobile_number": "999999999"
+}
+```
+
+3. Verify the returned HTTP status code.
+
+---
+
+## Expected Result
+
+```http
+HTTP/1.1 201 Created
+```
+
+---
+
+## Actual Result
+
+```http
+HTTP/1.1 200 OK
+```
+
+Response body:
+
+```json
+{
+  "responseCode": 201,
+  "message": "User created!"
+}
+```
+
+---
+
+## Impact
+
+- Breaks REST API conventions
+- Causes failures in automated API validations
+- Creates inconsistency between HTTP response and payload response
+- May confuse API consumers
+
+---
+#  Bug Report — API Accepts Invalid Email Format During Account Creation
+
+## Endpoint
+`POST https://automationexercise.com/api/createAccount`
+
+---
+
+## Description
+
+The API allows account creation using an invalid email format.
+
+According to validation best practices, the API should reject malformed email addresses and return:
+
+```http
+400 Bad Request
+```
+
+However, the endpoint accepts invalid email formats and successfully creates the user account.
+
+This indicates that email format validation is missing or not being enforced on the backend.
+
+---
+
+## Steps to Reproduce
+
+1. Send a `POST` request to:
+
+```bash
+https://automationexercise.com/api/createAccount
+```
+
+2. Use an invalid email format in the request body:
+
+```json
+{
+  "name": "QA User",
+  "email": "invalid-email-format",
+  "password": "Password1",
+  "title": "Mr",
+  "birth_date": "10",
+  "birth_month": "January",
+  "birth_year": "1995",
+  "firstname": "QA",
+  "lastname": "User",
+  "company": "QA Company",
+  "address1": "Street 1",
+  "address2": "Apartment 2",
+  "country": "Brazil",
+  "zipcode": "77000",
+  "state": "Tocantins",
+  "city": "Palmas",
+  "mobile_number": "999999999"
+}
+```
+
+3. Observe the API response.
+
+---
+
+## Expected Result
+
+The API should validate the email format and reject the request.
+
+Expected response:
+
+```http
+HTTP/1.1 400 Bad Request
+```
+
+Example response body:
+
+```json
+{
+  "responseCode": 400,
+  "message": "Invalid email format"
+}
+```
+
+---
+
+## Actual Result
+
+The API accepts the invalid email format and creates the account successfully.
+
+Returned response:
+
+```http
+HTTP/1.1 200 OK
+```
+
+Response body:
+
+```json
+{
+  "responseCode": 201,
+  "message": "User created!"
+}
+```
+
+---
+
+## Impact
+
+- Invalid data is stored in the system
+- Breaks backend input validation standards
+- May cause issues in authentication, communication, or user management flows
+- Reduces API reliability and data integrity
+- Can generate inconsistent or unusable user records
 
 ---
 

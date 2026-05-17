@@ -54,8 +54,8 @@ Então o sistema não deve permitir a finalização da compra
 E mensagens de validação devem ser exibidas para os campos obrigatórios
 E o pedido não deve ser processado.
 
-OBS: Atualmente é possivel finalizar a compra quando o cliente preenche só com tecla de espaço sem introducir dados válidos
----
+Nota: Atualmente é possivel finalizar a compra quando o cliente preenche só com tecla de espaço sem introducir dados válidos
+
 #### Edge case 2:
 Funcionalidade: Validação de limite de caracteres no formulário de cadastro de usuário
 
@@ -77,7 +77,6 @@ E os campos devem manter a integridade visual da interface
 E a aplicação não deve apresentar lentidão, falhas ou comportamento inesperado
 E a conta não deve ser criada com dados inválidos
 
----
 #### Edge case 3: 
 Funcionalidade: Prevenção de múltiplas submissões no pagamento
 
@@ -106,7 +105,6 @@ Este projeto foi desenvolvido como parte de um desafio técnico para a vaga de Q
 
 O principal objetivo foi validar funcionalidades críticas da aplicação Automation Exercise por meio de uma estrutura reutilizável, escalável e de fácil manutenção, seguindo boas práticas de automação.
 
----
 
 ### Tecnologias utilizadas
 
@@ -117,7 +115,6 @@ O principal objetivo foi validar funcionalidades críticas da aplicação Automa
 * Custom Commands
 * Utility Helpers
 
----
 
 ### Funcionalidades automatizadas
 
@@ -131,7 +128,6 @@ Foram implementados testes automatizados para validar endpoints REST, incluindo:
 * Validação de estrutura e tipos de dados
 * Validações negativas para cenários inválidos
 
----
 
 #### Testes E2E
 
@@ -144,8 +140,6 @@ Foi automatizado o fluxo completo de compra:
 * Pagamento
 * Confirmação do pedido
 
----
-
 ### Arquitetura do projeto
 
 O projeto foi estruturado utilizando o padrão Page Object Model (POM) para melhorar:
@@ -154,8 +148,6 @@ O projeto foi estruturado utilizando o padrão Page Object Model (POM) para melh
 * reutilização
 * legibilidade
 * separação de responsabilidades
-
----
 
 ### Estrutura de pastas
 
@@ -167,8 +159,6 @@ Testes de API REST.
 
 `e2e/`
 Testes End-to-End do fluxo completo do usuário.
-
----
 
 `cypress/pages`
 Contém as Page Objects.
@@ -188,8 +178,6 @@ Exemplos:
 
 Isso evita duplicação de código e facilita manutenção.
 
----
-
 `cypress/fixtures`
 
 Contém dados estáticos reutilizáveis para os testes.
@@ -201,8 +189,6 @@ Exemplos:
 * dados de pagamento
 
 Os fixtures permitem desacoplar os dados dos testes.
-
----
 
 `cypress/support`
 
@@ -217,8 +203,6 @@ Exemplos:
 * `createAccount`
 * requests reutilizáveis de API
 
----
-
 `utils.js`
 
 Funções helper reutilizáveis.
@@ -228,8 +212,6 @@ Exemplos:
 * geração de nomes aleatórios
 * geração de emails únicos
 * builders de dados dinâmicos
-
----
 
 `data/userFactory.js`
 
@@ -241,8 +223,6 @@ Permite:
 * reutilizar dados entre API e E2E
 * gerar emails únicos automaticamente
 
----
-
 `locators`
 
 Arquivo centralizado de seletores.
@@ -252,8 +232,6 @@ Permite:
 * centralizar manutenção
 * evitar duplicação
 * melhorar legibilidade
-
----
 
 ### Boas práticas aplicadas
 
@@ -267,7 +245,6 @@ Permite:
 * Validações positivas e negativas
 * Código desacoplado e de fácil manutenção
 
----
 ### Instalação do projeto
 Precisa instalar 
 
@@ -297,8 +274,6 @@ npx cypress run
 ### Endpoint
 `POST https://automationexercise.com/api/createAccount`
 
----
-
 ### Descrição
 
 A API retorna um código HTTP incorreto quando um usuário é criado com sucesso.
@@ -323,8 +298,6 @@ enquanto o corpo da resposta indica criação bem-sucedida:
   "message": "User created!"
 }
 ```
-
----
 
 ### Passos para Reproduzir
 
@@ -360,15 +333,11 @@ https://automationexercise.com/api/createAccount
 
 3. Verifique o código HTTP retornado.
 
----
-
 ### Resultado Esperado
 
 ```http
  201 Created
 ```
-
----
 
 ### Resultado Atual
 
@@ -385,8 +354,6 @@ Corpo da resposta:
 }
 ```
 
----
-
 ### Impacto
 
 - Quebra as convenções de APIs REST
@@ -394,14 +361,10 @@ Corpo da resposta:
 - Cria inconsistência entre a resposta HTTP e o payload retornado
 - Pode causar confusão para consumidores da API
 
----
-
 ## Bug Report 2 — API Aceita Formato de E-mail Inválido Durante a Criação de Conta
 
 ### Endpoint
 `POST https://automationexercise.com/api/createAccount`
-
----
 
 ### Descrição
 
@@ -416,8 +379,6 @@ De acordo com as boas práticas de validação, a API deveria rejeitar e-mails m
 Entretanto, o endpoint aceita formatos inválidos de e-mail e cria a conta com sucesso.
 
 Isso indica que a validação do formato de e-mail está ausente ou não está sendo aplicada corretamente no backend.
-
----
 
 ### Passos para Reproduzir
 
@@ -453,8 +414,6 @@ https://automationexercise.com/api/createAccount
 
 3. Observe a resposta da API.
 
----
-
 ### Resultado Esperado
 
 A API deveria validar o formato do e-mail e rejeitar a requisição.
@@ -474,8 +433,6 @@ Exemplo de corpo da resposta:
 }
 ```
 
----
-
 ### Resultado Atual
 
 A API aceita o formato inválido de e-mail e cria a conta com sucesso.
@@ -494,8 +451,6 @@ Corpo da resposta:
   "message": "User created!"
 }
 ```
-
----
 
 ### Impacto
 

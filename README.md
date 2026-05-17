@@ -1,5 +1,6 @@
 # Desafio-Tec-Analista-Teste-Pleno-Alejandra-Zu
 # Parte 1: Estratégia, BDD e Testes Manuais (Visão de Produto)
+1. BDD 
 Funcionalidade: Processo de finalização de compra com cadastro durante o checkout
 
 Como um cliente da loja online
@@ -29,6 +30,80 @@ E o cliente deve visualizar a mensagem de confirmação da compra
 
 Quando o cliente solicita a exclusão da conta
 Então a conta deve ser removida com sucesso
+
+2. Edge cases
+
+Edge case 1:
+Funcionalidade: Validação obrigatória dos dados de pagamento
+
+Como um cliente da loja online
+Quero que o sistema valide os campos obrigatórios de pagamento
+Para evitar a finalização de compras com informações inválidas
+
+Contexto:
+Dado que o cliente possui produtos no carrinho
+E acessa a etapa de pagamento do checkout
+
+Cenário: Impedir finalização da compra ao preencher os campos de pagamento utilizando apenas a tecla de espaço
+
+Quando o cliente preenche os campos de pagamento pressionando apenas a tecla de espaço
+  | Campo              |
+  | Nome no Cartão     |
+  | Número do Cartão   |
+  | CVC                |
+  | Data de Expiração  |
+
+E confirma o pagamento do pedido
+
+Então o sistema não deve permitir a finalização da compra
+E mensagens de validação devem ser exibidas para os campos obrigatórios
+E o pedido não deve ser processado.
+
+(OBS: Atualmente é possivel finalizar a compra quando o cliente preenche só com tecla de espaço sem introducir dados válidos)
+---
+Edge case 2:
+Funcionalidade: Validação de limite de caracteres no formulário de cadastro de usuário
+
+Como um visitante da loja online
+Quero que o formulário de cadastro valide o limite máximo de caracteres permitidos
+Para evitar inconsistências de dados, falhas na interface e erros durante o processamento do cadastro
+
+Contexto:
+Dado que o visitante acessa a tela de criação de conta
+
+Cenário: Impedir cadastro com quantidade de caracteres acima do limite permitido nos campos do formulário de criação da conta
+
+Quando o usuário informa dados acima do limite máximo permitido nos seguintes campos
+
+E tenta concluir a criação da conta
+
+Então o sistema deve impedir a inserção de caracteres acima do limite permitido
+E os campos devem manter a integridade visual da interface
+E a aplicação não deve apresentar lentidão, falhas ou comportamento inesperado
+E a conta não deve ser criada com dados inválidos
+
+---
+Edge case 3: 
+Funcionalidade: Prevenção de múltiplas submissões no pagamento
+
+Como um cliente da loja online
+Quero que o sistema impeça múltiplas confirmações simultâneas de pagamento
+Para evitar pedidos duplicados e cobranças indevidas
+
+Contexto:
+Dado que o cliente possui produtos no carrinho
+E acessa a etapa de pagamento do checkout
+E informa dados de pagamento válidos
+
+Cenário: Impedir criação de pedidos duplicados ao clicar repetidamente no botão de confirmação de pagamento
+
+Quando o cliente clica múltiplas vezes consecutivas no botão "Pagar e Confirmar Pedido"
+
+Então o sistema deve processar apenas uma única solicitação de pagamento
+E apenas um pedido deve ser criado
+E o cliente deve visualizar apenas uma confirmação de compra
+E a aplicação não deve apresentar erros, lentidão ou comportamento inesperado
+
 
 ---
 # Parte 2: Automação (Engenharia de Código)

@@ -15,16 +15,16 @@ class AuthPage {
     cy.get(authLocators.months).select(data.month)
     cy.get(authLocators.years).select(data.year)
 
-    cy.get(authLocators.firstName).type(data.firstName)
-    cy.get(authLocators.lastName).type(data.lastName)
-    cy.get(authLocators.password).type(data.password)
+    cy.get(authLocators.firstName).click().type(data.firstName)
+    cy.get(authLocators.lastName).click().type(data.lastName)
+    cy.get(authLocators.password).click().type(data.password)
 
-    cy.get(authLocators.address1).type(data.address)
+    cy.get(authLocators.address1).click().type(data.address)
     cy.get(authLocators.country).select(data.country)
-    cy.get(authLocators.state).type(data.state)
-    cy.get(authLocators.city).type(data.city)
-    cy.get(authLocators.zipcode).type(data.zipcode)
-    cy.get(authLocators.mobile).type(data.mobile)
+    cy.get(authLocators.state).click().type(data.state)
+    cy.get(authLocators.city).click().type(data.city)
+    cy.get(authLocators.zipcode).click().type(data.zipcode)
+    cy.get(authLocators.mobile).click().type(data.mobile)
   }
 
   createAccount() {

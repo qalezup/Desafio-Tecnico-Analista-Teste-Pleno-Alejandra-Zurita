@@ -11,9 +11,15 @@
   "company": "Cypress Inc.",
   "address1": "Pedro Bueno 1016",
   "address2": "Suite 1",
-  "country": "Brazil",
+  "country": "United States",
   "zipcode": "12345",
   "state": "SP",
   "city": "Sao Paulo",
-  "mobile_number": "1234567890"
+  "mobile_number": "1234567890",
+  "card": {
+    "number": "123456789",
+    "cvc": "123",
+    "month": "12",
+    "year": "2040"
+  }
 }

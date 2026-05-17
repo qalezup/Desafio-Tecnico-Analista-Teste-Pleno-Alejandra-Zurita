@@ -7,7 +7,7 @@ class CartPage {
   }
 
   openCart() {
-    cy.get(cartLocators.cartIcon).first().click()
+    cy.contains('a', 'Cart').click()
   }
 
   proceedToCheckout() {

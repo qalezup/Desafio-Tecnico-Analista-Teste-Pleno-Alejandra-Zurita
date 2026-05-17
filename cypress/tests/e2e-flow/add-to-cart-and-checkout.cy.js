@@ -4,11 +4,14 @@ import AuthPage from '../../pages/registerPage'
 import cartPage from '../../pages/cartPage'
 import { productsLocators } from '../../locators/locators'
 import PaymentPage from '../../pages/paymentPage'
+import { buildUserFromFixture } from '../../support/dataFactory'
 
-describe('AutomationExercise Flow Refactor', () => {
+describe('e2e frontend - purchase flow', () => {
 
   it('complete purchase flow', () => {
+  cy.fixture('create-account.json').then((payload) => {
 
+    const user = buildUserFromFixture(payload)
     ProductsPage.visit()
     ProductsPage.verifyPage()
 
@@ -20,43 +23,44 @@ describe('AutomationExercise Flow Refactor', () => {
     CartPage.proceedToCheckout()
     CartPage.goToRegisterLogin()
 
-    const email = `user${Date.now()}@mail.com`
+    AuthPage.openSignup(
+        user.name,
+        user.email
+      )
 
-    AuthPage.openSignup('QA User', email)
+      AuthPage.fillForm({
+        day: user.birth_date,
+        month: user.birth_month,
+        year: user.birth_year,
+        firstName: user.firstname,
+        lastName: user.lastname,
+        password: user.password,
+        address: user.address1,
+        country: user.country,
+        state: user.state,
+        city: user.city,
+        zipcode: user.zipcode,
+        mobile: user.mobile_number
+      })
 
-    AuthPage.fillForm({
-      day: '18',
-      month: 'March',
-      year: '1996',
-      firstName: 'QA',
-      lastName: 'User',
-      password: 'Test1234',
-      address: 'Calle Falsa 123',
-      country: 'United States',
-      state: 'California',
-      city: 'Los Angeles',
-      zipcode: '90001',
-      mobile: '1234567890'
-    })
+  
 
     AuthPage.createAccount()
     AuthPage.continue()
     CartPage.openCart()
     CartPage.proceedToCheckout()
-        CartPage.proceedToCheckout()
+    CartPage.proceedToCheckout()
 
-
-    // ---------------- PAYMENT ----------------
     PaymentPage.fillCard({
-      name: 'QA User',
-      number: '4111111111111111',
-      cvc: '123',
-      month: '12',
-      year: '2040'
+    name: user.name,
+    number: user.card.number,
+    cvc: user.card.cvc,
+    month: user.card.month,
+    year: user.card.year
     })
 
     PaymentPage.submit()
     PaymentPage.verifyOrder()
   })
-
+  })
 })

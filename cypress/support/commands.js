@@ -23,10 +23,17 @@ Cypress.Commands.add('createAccount', (payload) => {
   return cy.request({
     method: 'POST',
     url: 'https://automationexercise.com/api/createAccount',
-    body: payload
-    
+
+    form: true,
+
+    body: payload,
+
+    failOnStatusCode: false
+
   }).then((response) => {
+
     const body = typeof response.body === 'string' ? JSON.parse(response.body) : response.body
+
     return {
       status: response.status,
       body

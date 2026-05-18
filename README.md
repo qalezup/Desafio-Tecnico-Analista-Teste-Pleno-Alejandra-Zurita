@@ -451,6 +451,67 @@ Corpo da resposta:
   "message": "User created!"
 }
 ```
+## Bug Report 3 — Formulário de Pagamento Aceita Apenas Espaços em Branco e Permite Confirmar Pedido
+
+### Módulo
+Checkout / Pagamento
+
+### Descrição
+
+O formulário de pagamento valida corretamente os campos vazios quando o usuário clica no botão **"Pay and Confirm Order"** sem preencher nenhuma informação.
+
+Entretanto, a validação pode ser contornada ao preencher os campos obrigatórios utilizando apenas espaços em branco (pressionando a barra de espaço).
+
+O sistema aceita esses valores compostos somente por espaços como dados válidos e permite concluir e confirmar o pedido com sucesso.
+
+Isso indica que a validação dos inputs não está removendo ou rejeitando corretamente valores contendo apenas espaços em branco.
+
+### Passos para Reproduzir
+
+1. Acesse a página de pagamento.
+2. Nos campos obrigatórios do formulário de pagamento (nome no cartão, número do cartão, CVC, mês e ano de expiração):
+   - Pressione a `barra de espaço` uma ou mais vezes.
+3. Preencha todos os campos obrigatórios utilizando apenas espaços em branco.
+4. Clique no botão **"Pay and Confirm Order"**.
+5. Observe o comportamento do sistema.
+
+### Resultado Esperado
+
+O sistema deveria:
+
+- Remover espaços antes da validação
+- Rejeitar inputs contendo apenas espaços em branco
+- Impedir o processamento do pagamento e a confirmação do pedido
+
+### Resultado Atual
+
+O sistema aceita campos preenchidos apenas com espaços em branco e confirma o pedido com sucesso após clicar em:
+
+```text
+"Pay and Confirm Order"
+```
+
+### Impacto
+
+- As regras de validação podem ser facilmente contornadas
+- Informações inválidas de pagamento são aceitas
+- Reduz a confiabilidade das validações do checkout
+- Pode permitir pagamentos incompletos ou falsos
+- Compromete a integridade dos dados e do fluxo de compra
+
+## Severidade
+Alta
+
+## Prioridade
+Alta
+
+## Sugestão de Correção
+
+Implementar validação adequada nos campos de pagamento:
+
+- Aplicar `.trim()` ou equivalente antes da validação
+- Validar corretamente todos os campos obrigatórios no frontend e backend
+- Bloquear a confirmação do pedido quando valores inválidos forem detectados
 
 ### Impacto
 
@@ -460,4 +521,3 @@ Corpo da resposta:
 - Reduz a confiabilidade e integridade da API
 - Pode gerar registros inconsistentes ou inutilizáveis
 
----

@@ -251,7 +251,7 @@ Precisa instalar
 ```bash
 npm init -y
 npm install
-npm install cypress --save-dev
+npm install cypress 
 ```
 ### Execução do projeto
 Executar Cypress em modo interativo
